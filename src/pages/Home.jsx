@@ -15,8 +15,8 @@ import {
 } from "recharts";
 
 import { fetchProducts } from "../Api/productsApi";
-import { fetchUsers } from "../api/usersApi";
-import { fetchCrypto } from "../api/cryptoApi";
+import { fetchUsers } from "../Api/usersApi";
+import { fetchCrypto } from "../Api/cryptoApi";
 import Sidebar from "../layout/Sidebar"
 
 import "../assets/css/dashboard.css";
