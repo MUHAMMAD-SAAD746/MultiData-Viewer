@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { fetchCrypto } from "../api/cryptoApi";
+import { fetchCrypto } from "../Api/cryptoApi";
 import CryptoCard from "../components/CryptoCard";
 import "../assets/css/Crypto.css";
 
