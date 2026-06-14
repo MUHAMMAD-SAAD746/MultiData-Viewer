@@ -14,7 +14,7 @@ import {
   Legend,
 } from "recharts";
 
-import { fetchProducts } from "../api/productsApi";
+import { fetchProducts } from "../Api/productsApi";
 import { fetchUsers } from "../api/usersApi";
 import { fetchCrypto } from "../api/cryptoApi";
 import Sidebar from "../layout/Sidebar"
