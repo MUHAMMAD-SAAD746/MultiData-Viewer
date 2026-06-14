@@ -1,0 +1,447 @@
+/* ─────────────────────────────────────────────────────────
+   dashboard.css — DataPulse Analytics Dashboard
+   Import in Home.jsx:  import "./dashboard.css";
+   Depends on: Recharts (charts), @tanstack/react-query
+───────────────────────────────────────────────────────── */
+
+/* ── Reset / base ─────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Design tokens ────────────────────────────────────── */
+:root {
+  --db-font:           -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  --db-bg-page:        #f0f2f5;
+  --db-bg-surface:     #ffffff;
+  --db-bg-secondary:   #f7f8fa;
+
+  --db-border:         rgba(0, 0, 0, 0.08);
+  --db-border-hover:   rgba(0, 0, 0, 0.16);
+
+  --db-text-primary:   #1a1a1a;
+  --db-text-secondary: #6b7280;
+  --db-text-tertiary:  #9ca3af;
+
+  --db-accent:         #378ADD;
+  --db-accent-light:   #E6F1FB;
+
+  --db-green:          #1D9E75;
+  --db-green-light:    #E1F5EE;
+  --db-red:            #D85A30;
+  --db-red-light:      #FAECE7;
+
+  --db-radius-sm:      6px;
+  --db-radius-md:      8px;
+  --db-radius-lg:      12px;
+  --db-radius-xl:      16px;
+
+  --db-sidebar-w:      220px;
+  --db-topbar-h:       56px;
+
+  --db-shadow-card:    0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+/* ── Root layout ──────────────────────────────────────── */
+.db-root {
+  display: grid;
+  grid-template-columns: var(--db-sidebar-w) 1fr;
+  min-height: 100vh;
+  background: var(--db-bg-page);
+  font-family: var(--db-font);
+  color: var(--db-text-primary);
+}
+
+/* ── Sidebar ──────────────────────────────────────────── */
+
+
+/* ── Main column ──────────────────────────────────────── */
+.db-main {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+/* ── Topbar ───────────────────────────────────────────── */
+.db-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--db-topbar-h);
+  padding: 0 24px;
+  background: var(--db-bg-surface);
+  border-bottom: 0.5px solid var(--db-border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.db-topbar__title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--db-text-primary);
+}
+
+.db-topbar__sub {
+  font-size: 11px;
+  color: var(--db-text-tertiary);
+  margin-top: 1px;
+}
+
+.db-topbar__right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ── Badges ───────────────────────────────────────────── */
+.db-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  background: var(--db-bg-secondary);
+  border: 0.5px solid var(--db-border);
+  border-radius: var(--db-radius-md);
+  font-size: 12px;
+  color: var(--db-text-secondary);
+  cursor: default;
+  user-select: none;
+}
+
+.db-badge--live {
+  background: var(--db-green-light);
+  color: var(--db-green);
+  border-color: transparent;
+}
+
+.db-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--db-green);
+}
+
+/* ── Content area ─────────────────────────────────────── */
+.db-content {
+  padding: 20px 24px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;
+}
+
+/* ── Stat cards grid ──────────────────────────────────── */
+.db-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.db-stat-card {
+  background: var(--db-bg-surface);
+  border: 0.5px solid var(--db-border);
+  border-radius: var(--db-radius-lg);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: var(--db-shadow-card);
+  transition: box-shadow 0.15s;
+}
+
+.db-stat-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.db-stat-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.db-stat-card__label {
+  font-size: 12px;
+  color: var(--db-text-secondary);
+  font-weight: 400;
+}
+
+.db-stat-card__icon {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--db-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.db-stat-card__value {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--db-text-primary);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.db-stat-card__change {
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.db-stat-card__change--up  { color: var(--db-green); }
+.db-stat-card__change--dn  { color: var(--db-red);   }
+
+/* ── Cards ────────────────────────────────────────────── */
+.db-card {
+  background: var(--db-bg-surface);
+  border: 0.5px solid var(--db-border);
+  border-radius: var(--db-radius-lg);
+  padding: 16px;
+  box-shadow: var(--db-shadow-card);
+}
+
+.db-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.db-card__title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--db-text-primary);
+}
+
+/* ── Tags ─────────────────────────────────────────────── */
+.db-tag {
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: var(--db-radius-md);
+  background: var(--db-bg-secondary);
+  color: var(--db-text-secondary);
+  border: 0.5px solid var(--db-border);
+}
+
+.db-tag--info {
+  background: var(--db-accent-light);
+  color: var(--db-accent);
+  border-color: transparent;
+}
+
+/* ── Charts row ───────────────────────────────────────── */
+.db-charts-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* ── Tables row ───────────────────────────────────────── */
+.db-tables-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* ── Generic list ─────────────────────────────────────── */
+.db-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.db-list__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 0;
+  border-bottom: 0.5px solid var(--db-border);
+}
+
+.db-list__row:last-child {
+  border-bottom: none;
+}
+
+.db-list__row--user {
+  gap: 10px;
+  justify-content: flex-start;
+}
+
+.db-list__primary {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--db-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 210px;
+}
+
+.db-list__secondary {
+  font-size: 11px;
+  color: var(--db-text-tertiary);
+  margin-top: 1px;
+}
+
+.db-list__value {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--db-text-primary);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ── Avatar ───────────────────────────────────────────── */
+.db-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+/* ── Crypto table ─────────────────────────────────────── */
+.db-crypto-table-wrap {
+  overflow-x: auto;
+}
+
+.db-crypto-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.db-crypto-table th {
+  text-align: left;
+  padding: 6px 0 8px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--db-text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 0.5px solid var(--db-border);
+}
+
+.db-crypto-table td {
+  padding: 10px 0;
+  border-bottom: 0.5px solid var(--db-border);
+  color: var(--db-text-primary);
+  vertical-align: middle;
+}
+
+.db-crypto-table tr:last-child td {
+  border-bottom: none;
+}
+
+.db-crypto-table__muted {
+  color: var(--db-text-secondary) !important;
+}
+
+.db-crypto-table__rank {
+  color: var(--db-text-tertiary) !important;
+}
+
+.db-coin-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.db-coin-img {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  object-fit: contain;
+}
+
+/* ── Pills ────────────────────────────────────────────── */
+.db-pill {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.db-pill--up {
+  background: var(--db-green-light);
+  color: var(--db-green);
+}
+
+.db-pill--dn {
+  background: var(--db-red-light);
+  color: var(--db-red);
+}
+
+/* ── Loading / error states ───────────────────────────── */
+.db-state-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  min-height: 300px;
+  font-size: 14px;
+  color: var(--db-text-secondary);
+}
+
+.db-state-center--error {
+  color: var(--db-red);
+}
+
+.db-spinner {
+  width: 32px;
+  height: 32px;
+  border: 2.5px solid var(--db-border);
+  border-top-color: var(--db-accent);
+  border-radius: 50%;
+  animation: db-spin 0.7s linear infinite;
+}
+
+@keyframes db-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Responsive ───────────────────────────────────────── */
+@media (max-width: 1100px) {
+  .db-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .db-root {
+    grid-template-columns: 1fr;
+  }
+
+  .db-sidebar {
+    display: none;     /* hide sidebar on mobile; add a burger menu toggle as needed */
+  }
+
+  .db-charts-row,
+  .db-tables-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .db-stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .db-content {
+    padding: 16px;
+  }
+}

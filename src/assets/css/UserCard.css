@@ -1,0 +1,169 @@
+/* Uses tokens from Users.css — load that first */
+
+/* ── Card ─────────────────────────────────────────────── */
+.user-card {
+    background: var(--u-surface);
+    border: 1px solid var(--u-border);
+    border-radius: 14px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: border-color 0.18s, box-shadow 0.18s, transform 0.18s;
+}
+
+.user-card:hover {
+    border-color: var(--u-border-hover);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    transform: translateY(-2px);
+}
+
+/* ── Top ──────────────────────────────────────────────── */
+.uc-top {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.uc-avatar-img,
+.uc-avatar-initials {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    object-fit: cover;
+}
+
+.uc-avatar-initials {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: var(--u-font);
+    letter-spacing: -0.01em;
+    user-select: none;
+}
+
+.uc-identity {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.uc-name {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--u-text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.uc-meta {
+    margin: 0;
+    font-size: 12px;
+    color: var(--u-text-muted);
+}
+
+/* ── Divider ──────────────────────────────────────────── */
+.uc-divider {
+    height: 1px;
+    background: var(--u-border);
+}
+
+/* ── Details ──────────────────────────────────────────── */
+.uc-details {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.uc-detail-row {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 13px;
+    color: var(--u-text-secondary);
+    min-width: 0;
+}
+
+.uc-icon {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+    color: var(--u-text-muted);
+}
+
+.uc-link {
+    color: var(--u-accent);
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+}
+
+.uc-link:hover {
+    text-decoration: underline;
+}
+
+.uc-detail-row span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ── Footer ───────────────────────────────────────────── */
+.uc-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 2px;
+}
+
+.uc-uuid {
+    font-family: var(--u-mono);
+    font-size: 10px;
+    color: var(--u-text-muted);
+    letter-spacing: 0.04em;
+    background: var(--u-bg);
+    padding: 3px 7px;
+    border-radius: 5px;
+    border: 1px solid var(--u-border);
+}
+
+.uc-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--u-accent);
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 7px;
+    border: 1px solid transparent;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.uc-action:hover {
+    background: var(--u-accent-soft);
+    border-color: rgba(79, 70, 229, 0.18);
+}
+
+/* ── Reduced motion ───────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+    .user-card {
+        transition: none;
+    }
+
+    .uc-action {
+        transition: none;
+    }
+}

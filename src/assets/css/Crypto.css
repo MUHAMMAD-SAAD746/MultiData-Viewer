@@ -1,0 +1,227 @@
+/* ── Tokens ────────────────────────────────────────────── */
+:root {
+    --bg-base: #F5F6FA;
+    --bg-card: #FFFFFF;
+    --bg-card-hover: #F9FAFC;
+
+    --border: rgba(0, 0, 0, 0.08);
+
+    --accent: #3B82F6;
+    --accent-glow: rgba(59, 130, 246, 0.15);
+
+    --positive: #10B981;
+    --negative: #EF4444;
+
+    --text-primary: #111827;
+    --text-secondary: #6B7280;
+    --text-muted: #9CA3AF;
+
+    --font-ui: 'Inter', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+/* ── Page shell ────────────────────────────────────────── */
+.crypto-page {
+    min-height: 100vh;
+    background: var(--bg-base);
+    font-family: var(--font-ui);
+    color: var(--text-primary);
+}
+
+/* ── Header ────────────────────────────────────────────── */
+.crypto-header {
+    border-bottom: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.crypto-header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.crypto-title-group {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.crypto-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+}
+
+.crypto-title {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 0;
+    color: var(--text-primary);
+}
+
+/* ── Summary bar ───────────────────────────────────────── */
+.crypto-summary-bar {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.summary-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 10px 20px;
+}
+
+.summary-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+}
+
+.summary-value {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.summary-value.positive {
+    color: var(--positive);
+}
+
+.summary-value.negative {
+    color: var(--negative);
+}
+
+.summary-divider {
+    width: 1px;
+    height: 32px;
+    background: var(--border);
+    flex-shrink: 0;
+}
+
+/* ── Main ──────────────────────────────────────────────── */
+.crypto-main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px 24px 64px;
+}
+
+/* ── Grid ──────────────────────────────────────────────── */
+.crypto-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 16px;
+}
+
+/* ── Skeleton loading ──────────────────────────────────── */
+.crypto-loading {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 16px;
+}
+
+.skeleton-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.skeleton-line {
+    height: 12px;
+    border-radius: 6px;
+    background: linear-gradient(90deg,
+            var(--border) 25%,
+            #1f2d42 50%,
+            var(--border) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.4s infinite;
+}
+
+.skeleton-line.short {
+    width: 30%;
+}
+
+.skeleton-line.medium {
+    width: 55%;
+}
+
+.skeleton-line.long {
+    width: 80%;
+    height: 20px;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* ── Error state ───────────────────────────────────────── */
+.crypto-error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 80px 24px;
+    color: var(--text-secondary);
+    text-align: center;
+}
+
+.error-icon {
+    font-size: 32px;
+    color: var(--negative);
+}
+
+.crypto-error p {
+    margin: 0;
+    font-size: 15px;
+    max-width: 360px;
+    line-height: 1.6;
+}
+
+/* ── Responsive ────────────────────────────────────────── */
+@media (max-width: 640px) {
+    .crypto-header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .crypto-summary-bar {
+        width: 100%;
+        justify-content: space-around;
+    }
+
+    .summary-stat {
+        padding: 10px 12px;
+    }
+}

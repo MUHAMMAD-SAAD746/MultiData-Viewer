@@ -1,0 +1,202 @@
+/* Inherits tokens from Crypto.css — load that first */
+
+/* ── Card shell ────────────────────────────────────────── */
+.crypto-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    cursor: pointer;
+    transition: background 0.18s ease, border-color 0.18s ease,
+        transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.crypto-card:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35), 0 0 0 1px var(--accent-glow);
+}
+
+/* ── Top row ───────────────────────────────────────────── */
+.card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.coin-identity {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.coin-image {
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.coin-name {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-primary);
+    white-space: nowrap;
+}
+
+.coin-symbol {
+    margin: 2px 0 0;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+}
+
+/* ── Change badge ──────────────────────────────────────── */
+.change-badge {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+}
+
+.change-badge.pos {
+    color: var(--positive);
+    background: rgba(16, 185, 129, 0.12);
+}
+
+.change-badge.neg {
+    color: var(--negative);
+    background: rgba(239, 68, 68, 0.12);
+}
+
+/* ── Price ─────────────────────────────────────────────── */
+.card-price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+}
+
+.coin-price {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--text-primary);
+    transition: color 0.1s ease;
+}
+
+/* One-shot flash on mount */
+@keyframes priceFlash {
+    0% {
+        color: var(--accent);
+    }
+
+    100% {
+        color: var(--text-primary);
+    }
+}
+
+.coin-price.price-flash {
+    animation: priceFlash 0.7s ease forwards;
+}
+
+/* ── Stats row ─────────────────────────────────────────── */
+.card-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 4px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.stat-label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+}
+
+.stat-value {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.stat-value.rank {
+    color: var(--accent);
+    font-weight: 700;
+}
+
+/* ── 24h range ─────────────────────────────────────────── */
+.range-section {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.range-labels {
+    display: flex;
+    justify-content: space-between;
+}
+
+.range-bar-track {
+    position: relative;
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: visible;
+}
+
+.range-bar-fill {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), #60A5FA);
+    border-radius: 2px;
+    transition: width 0.4s ease;
+}
+
+.range-bar-dot {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    background: #fff;
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+    box-shadow: 0 0 6px var(--accent-glow);
+    transition: left 0.4s ease;
+}
+
+/* ── Reduced motion ────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+    .crypto-card {
+        transition: none;
+    }
+
+    .coin-price.price-flash {
+        animation: none;
+    }
+
+    .range-bar-fill,
+    .range-bar-dot {
+        transition: none;
+    }
+}
