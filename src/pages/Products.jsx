@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { fetchProducts } from "../api/productsApi";
+import { fetchProducts } from "../Api/productsApi";
 import ProductCard from "../components/ProductCard";
 import "../assets/css/products.css";
 
