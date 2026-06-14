@@ -2,7 +2,7 @@ import { useState, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { fetchUsers } from "../Api/usersApi";
 import UserCard from "../components/UserCard";
-import "../assets/css/User.css";
+import "../assets/css/user.css";
 
 const Users = () => {
   const [search, setSearch] = useState("");
